@@ -25,5 +25,6 @@ def setup_gates():
 		"CRZ": qml.CRZ,
 		"CRY": qml.CRY,
 		"CRX": qml.CRX,
+		"QFT": qml.QFT,
 	}
 setup_gates()
