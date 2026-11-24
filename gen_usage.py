@@ -13,10 +13,17 @@ dev = qml.device("default.mixed")
 starting_state = np.sqrt(np.array([1, 0]))
 starting_wires = []
 
+def get_trace_dist(rho, delta):
+    return 0.5 * np.trace(np.sqrt(np.conj(rho - delta).T * (rho - delta)))
+
+def get_fidelity(rho, delta):
+    return (np.trace(np.sqrt(np.sqrt(rho)*delta*np.sqrt(rho))))**2
+    return np.conj(state).T * state
+
 def get_exp_val(state, op, is_matrix=True):
     if not is_matrix:
         op = qml.matrix(op)(wires=0)
-    return np.trace(qp.math.dot(state, op))
+    return np.trace(qml.math.dot(state, op))
 
 @qml.qnode(dev)
 def pure_state_to_dens_mat(state, wires):
